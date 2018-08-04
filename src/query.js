@@ -33,6 +33,26 @@ export default class Query {
       yield* second();
     });
   }
+
+  union(query) {
+    let first = this.generator;
+    let second = query.generator;
+    return new Query(function*() {
+      let seen = new Map();
+      for (let x of first()) {
+        if (!seen.has(x)) {
+          seen.set(x, true);
+          yield x;
+        }
+      }
+      for (let y of second()) {
+        if (!seen.has(y)) {
+          seen.set(y, true);
+          yield y;
+        }
+      }
+    });
+  }
 }
 
 Query.prototype[Symbol.iterator] = function* iterator() {

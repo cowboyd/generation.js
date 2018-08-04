@@ -10,3 +10,9 @@ export function concat(...iterables) {
     return query.concat(new Query(generator(iterable)))
   }, new Query());
 }
+
+export function union(...iterables) {
+  return iterables.reduce((query, iterable) => {
+    return query.union(new Query(generator(iterable)));
+  }, new Query());
+}
