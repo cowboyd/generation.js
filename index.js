@@ -16,3 +16,11 @@ export function union(...iterables) {
     return query.union(new Query(generator(iterable)));
   }, new Query());
 }
+
+export function intersect(first, ...iterables) {
+  if (first) {
+    return new Query(generator(first)).intersect(union(...iterables));
+  } else {
+    return new Query();
+  }
+}

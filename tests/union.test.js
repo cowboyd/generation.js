@@ -1,13 +1,15 @@
 import expect from 'expect';
-import { union } from '../index';
+import { intersect } from '../index';
 
 describe('concatenating to iterables', function() {
-  let unioned;
+  let intersection;
   beforeEach(function() {
-    unioned = union([ 1, 2, 3], [3,4, 4, 5], [5, 6, 7, 1]);
+    intersection = intersect([ 1, 2, 3], [3,4, 4, 5], [5, 6, 7, 1]);
   });
   it('creates a query excludes duplicates', function() {
-    let [...result] = unioned;
-    expect(result).toEqual([1, 2, 3, 4, 5, 6, 7]);
+    let [...result] = intersection;
+    expect(result.length).toEqual(2);
+    expect(result.includes(1)).toBe(true);
+    expect(result.includes(3)).toBe(true);
   });
 });

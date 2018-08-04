@@ -53,6 +53,21 @@ export default class Query {
       }
     });
   }
+
+  intersect(query) {
+    let self = this;
+    return new Query(function*() {
+      let seen = new Map();
+      for (let x of self) {
+        seen.set(x, true);
+      }
+      for (let y of query) {
+        if (seen.has(y)) {
+          yield y;
+        }
+      }
+    });
+  }
 }
 
 Query.prototype[Symbol.iterator] = function* iterator() {
