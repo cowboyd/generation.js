@@ -4,3 +4,9 @@ import generator from './src/generator';
 export function filter(iterable, fn) {
   return new Query(generator(iterable)).filter(fn);
 }
+
+export function concat(...iterables) {
+  return iterables.reduce((query, iterable) => {
+    return query.concat(new Query(generator(iterable)))
+  }, new Query());
+}

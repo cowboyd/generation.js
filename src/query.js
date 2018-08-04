@@ -1,5 +1,5 @@
 export default class Query {
-  constructor(generator) {
+  constructor(generator = function* empty() {}) {
     this.generator = generator;
   }
 
@@ -23,6 +23,15 @@ export default class Query {
         }
       }
     })
+  }
+
+  concat(query) {
+    let first = this.generator;
+    let second = query.generator;
+    return new Query(function*() {
+      yield* first();
+      yield* second();
+    });
   }
 }
 
