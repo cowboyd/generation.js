@@ -13,6 +13,17 @@ export default class Query {
       return again;
     }
   }
+
+  filter(fn) {
+    let { generator } = this;
+    return new Query(function*() {
+      for (let item of generator()) {
+        if (fn(item)) {
+          yield item;
+        }
+      }
+    })
+  }
 }
 
 Query.prototype[Symbol.iterator] = function* iterator() {
