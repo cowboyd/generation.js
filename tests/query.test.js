@@ -3,17 +3,30 @@ import expect from "expect";
 import Query from '../src/query';
 
 describe("Query", () => {
-  it('plays back a generator', function() {
-    let [...result] = new Query(function*() {
-      yield 1;
-      yield 2;
-      yield 3;
-    })
-    expect(result).toEqual([1,2,3]);
+  let query;
+  beforeEach(function() {
+    query = new Query(function*() {
+      yield {};
+      yield {};
+      yield {};
+    });
   });
 
+  it('plays back a generator', function() {
+    let [...result] = query;
+    expect(result).toEqual([{},{},{}]);
+  });
+  it('replays the same iterator the second time', function() {
+    let [one, two, three] = query;
+    let [_one, _two, _three ] = query;
+    expect(_one).toBe(one);
+    expect(_two).toBe(two);
+    expect(_three).toBe(three);
+  });
+
+
   describe('caching queries', () => {
-    let source = function*() {
+    let source = function* () {
       yield 1;
       yield 2;
       yield 3;
@@ -21,8 +34,14 @@ describe("Query", () => {
     let query = new Query(function* () {
       yield* source();
     });
-    let [...result] = query;
+
     describe('when the underlying source remains constant', () => {
+      let result;
+      beforeEach(function() {
+        [...result] = query;
+
+      });
+
       it('returns itself when asked to recompute', function() {
         let [...again] = query;
         expect(again).toEqual(result);
