@@ -7,13 +7,13 @@ export function filter(iterable, fn) {
 
 export function concat(...iterables) {
   return iterables.reduce((query, iterable) => {
-    return query.concat(new Query(generator(iterable)))
+    return query.concat(iterable);
   }, new Query());
 }
 
 export function union(...iterables) {
   return iterables.reduce((query, iterable) => {
-    return query.union(new Query(generator(iterable)));
+    return query.union(iterable);
   }, new Query());
 }
 

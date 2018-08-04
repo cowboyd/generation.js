@@ -15,9 +15,9 @@ export default class Query {
   }
 
   filter(fn) {
-    let { generator } = this;
+    let self = this;
     return new Query(function*() {
-      for (let item of generator()) {
+      for (let item of self) {
         if (fn(item)) {
           yield item;
         }
@@ -26,26 +26,24 @@ export default class Query {
   }
 
   concat(query) {
-    let first = this.generator;
-    let second = query.generator;
+    let self = this;
     return new Query(function*() {
-      yield* first();
-      yield* second();
+      yield* self;
+      yield* query;
     });
   }
 
   union(query) {
-    let first = this.generator;
-    let second = query.generator;
+    let self = this;
     return new Query(function*() {
       let seen = new Map();
-      for (let x of first()) {
+      for (let x of self) {
         if (!seen.has(x)) {
           seen.set(x, true);
           yield x;
         }
       }
-      for (let y of second()) {
+      for (let y of query) {
         if (!seen.has(y)) {
           seen.set(y, true);
           yield y;
