@@ -11,13 +11,11 @@ export default class Query {
   }
 
   recompute() {
-    let again = new Query(this.generator);
-    let [...next] = again;
-    let [...current] = this;
-    if (next.length === current.length && next.every((item, i) => item === current[i])) {
+    let next = new Query(this.generator);
+    if (this.disjunct(next).length === 0) {
       return this;
     } else {
-      return again;
+      return next;
     }
   }
 
