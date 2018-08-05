@@ -70,17 +70,17 @@ export default class Query {
       }
     }.bind(this));
   }
-}
 
-Query.prototype[Symbol.iterator] = function* iterator() {
-  let cache = [];
+  *[Symbol.iterator]() {
+    let cache = [];
 
-  this[Symbol.iterator] = function* iterateCache() {
-    yield* cache;
-  }
+    this[Symbol.iterator] = function* iterateCache() {
+      yield* cache;
+    }
 
-  for (let item of this.generator()) {
-    cache.push(item);
-    yield item;
+    for (let item of this.generator()) {
+      cache.push(item);
+      yield item;
+    }
   }
 }
