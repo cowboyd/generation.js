@@ -71,6 +71,23 @@ export default class Query {
     }.bind(this));
   }
 
+  disjunct(query) {
+    return new Query(function*() {
+      let disjunction = new Set();
+      for (let x of this) {
+        disjunction.add(x);
+      }
+      for (let y of query) {
+        if (disjunction.has(y)) {
+          disjunction.delete(y);
+        } else {
+          yield y;
+        }
+      }
+      yield* disjunction;
+    }.bind(this))
+  }
+
   *[Symbol.iterator]() {
     let cache = [];
 

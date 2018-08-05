@@ -28,3 +28,9 @@ export function intersect(first, ...iterables) {
     return new Query();
   }
 }
+
+export function disjunct(...iterables) {
+  return iterables.reduce((query, iterable) => {
+    return query.disjunct(iterable);
+  }, new Query())
+}
