@@ -65,14 +65,10 @@ export default class Query {
   intersect(query) {
     return new Query(function*() {
       let seen = new Set();
-      for (let x of this) {
+      for (let x of query) {
         seen.add(x);
       }
-      for (let y of query) {
-        if (seen.has(y)) {
-          yield y;
-        }
-      }
+      yield* this.filter(y => seen.has(y))
     }.bind(this));
   }
 
