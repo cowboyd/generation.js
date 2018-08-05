@@ -5,6 +5,11 @@ export default class Query {
     this.generator = generator(source);
   }
 
+  get length() {
+    for (let x of this) {};
+    return this.length;
+  }
+
   recompute() {
     let again = new Query(this.generator);
     let [...next] = again;
@@ -101,5 +106,6 @@ export default class Query {
       cache.push(item);
       yield item;
     }
+    Object.defineProperty(this, 'length', { value: cache.length });
   }
 }

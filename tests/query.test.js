@@ -24,6 +24,10 @@ describe("Query", () => {
     expect(_three).toBe(three);
   });
 
+  it('can count itself', function() {
+    expect(query.length).toEqual(3);
+  });
+
 
   describe('caching queries', () => {
     let source = function* () {
