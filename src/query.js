@@ -15,38 +15,34 @@ export default class Query {
   }
 
   map(fn) {
-    let self = this;
     return new Query(function*() {
-      for (let x of self) {
+      for (let x of this) {
         yield fn(x);
       }
-    });
+    }.bind(this));
   }
 
   filter(fn) {
-    let self = this;
     return new Query(function*() {
-      for (let item of self) {
+      for (let item of this) {
         if (fn(item)) {
           yield item;
         }
       }
-    })
+    }.bind(this))
   }
 
   concat(query) {
-    let self = this;
     return new Query(function*() {
-      yield* self;
+      yield* this;
       yield* query;
-    });
+    }.bind(this));
   }
 
   union(query) {
-    let self = this;
     return new Query(function*() {
       let seen = new Map();
-      for (let x of self) {
+      for (let x of this) {
         if (!seen.has(x)) {
           seen.set(x, true);
           yield x;
@@ -58,14 +54,13 @@ export default class Query {
           yield y;
         }
       }
-    });
+    }.bind(this));
   }
 
   intersect(query) {
-    let self = this;
     return new Query(function*() {
       let seen = new Map();
-      for (let x of self) {
+      for (let x of this) {
         seen.set(x, true);
       }
       for (let y of query) {
@@ -73,7 +68,7 @@ export default class Query {
           yield y;
         }
       }
-    });
+    }.bind(this));
   }
 }
 
