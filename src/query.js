@@ -41,16 +41,16 @@ export default class Query {
 
   union(query) {
     return new Query(function*() {
-      let seen = new Map();
+      let seen = new Set();
       for (let x of this) {
         if (!seen.has(x)) {
-          seen.set(x, true);
+          seen.add(x);
           yield x;
         }
       }
       for (let y of query) {
         if (!seen.has(y)) {
-          seen.set(y, true);
+          seen.add(y);
           yield y;
         }
       }
@@ -59,9 +59,9 @@ export default class Query {
 
   intersect(query) {
     return new Query(function*() {
-      let seen = new Map();
+      let seen = new Set();
       for (let x of this) {
-        seen.set(x, true);
+        seen.add(x);
       }
       for (let y of query) {
         if (seen.has(y)) {
