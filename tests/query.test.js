@@ -28,6 +28,11 @@ describe("Query", () => {
     expect(query.length).toEqual(3);
   });
 
+  it('does not do any computation on a recompute if it has not been computed already', function() {
+    let query = new Query(function*() { throw new Error('boom!')});
+    expect(query.recompute()).toBe(query);
+  });
+
 
   describe('caching queries', () => {
     let source = function* () {

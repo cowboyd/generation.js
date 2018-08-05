@@ -12,11 +12,15 @@ export default class Query {
 
   recompute() {
     let next = new Query(this.generator);
-    if (this.disjunct(next).length === 0) {
+    if (!this.isReified || this.equals(next)) {
       return this;
     } else {
       return next;
     }
+  }
+
+  equals(query) {
+    return this.disjunct(query).length === 0;
   }
 
   map(fn) {
@@ -90,6 +94,7 @@ export default class Query {
   }
 
   *[Symbol.iterator]() {
+    this.isReified = true;
     let cache = [];
 
     this[Symbol.iterator] = function* iterateCache() {
