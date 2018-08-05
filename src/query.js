@@ -14,6 +14,15 @@ export default class Query {
     }
   }
 
+  map(fn) {
+    let self = this;
+    return new Query(function*() {
+      for (let x of self) {
+        yield fn(x);
+      }
+    });
+  }
+
   filter(fn) {
     let self = this;
     return new Query(function*() {
