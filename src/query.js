@@ -76,15 +76,11 @@ Query.prototype[Symbol.iterator] = function* iterator() {
   let cache = [];
 
   this[Symbol.iterator] = function* iterateCache() {
-    yield* iterate(cache);
+    yield* cache;
   }
 
   for (let item of this.generator()) {
     cache.push(item);
     yield item;
   }
-}
-
-function iterate(iterable) {
-  return iterable[Symbol.iterator]();
 }
