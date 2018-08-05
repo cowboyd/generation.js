@@ -1,6 +1,8 @@
+import generator from './generator';
+
 export default class Query {
-  constructor(generator = function* empty() {}) {
-    this.generator = generator;
+  constructor(source = []) {
+    this.generator = generator(source);
   }
 
   recompute() {
