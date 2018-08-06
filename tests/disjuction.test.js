@@ -1,15 +1,17 @@
 import expect from 'expect';
-import { intersect } from '../index';
+import { disjunct } from '../index';
 
-describe('concatenating to iterables', function() {
-  let intersection;
+describe('disjuctive union', function() {
+  let disjunction;
   beforeEach(function() {
-    intersection = intersect([ 1, 2, 3], [3,4, 4, 5], [5, 6, 7, 1]);
+    disjunction = disjunct([ 1, 2, 3], [3,4, 4, 5], [5, 6, 7, 1]);
   });
-  it('creates a query excludes duplicates', function() {
-    let [...result] = intersection;
-    expect(result.length).toEqual(2);
-    expect(result.includes(1)).toBe(true);
-    expect(result.includes(3)).toBe(true);
+  it('creates a query which excludes the common elements', function() {
+    let [...result] = disjunction;
+    expect(result.length).toEqual(4);
+    expect(result.includes(2)).toBe(true);
+    expect(result.includes(4)).toBe(true);
+    expect(result.includes(6)).toBe(true);
+    expect(result.includes(7)).toBe(true);
   });
 });
