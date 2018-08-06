@@ -4,7 +4,7 @@ import { disjunct } from '../index';
 describe('disjuctive union', function() {
   let disjunction;
   beforeEach(function() {
-    disjunction = disjunct([ 1, 2, 3], [3,4, 4, 5], [5, 6, 7, 1]);
+    disjunction = disjunct([ 1, 2, 3], [3,4, 4, 5], [5, 5, 6, 7, 1]);
   });
   it('creates a query which excludes the common elements', function() {
     let [...result] = disjunction;

@@ -78,12 +78,14 @@ export default class Query {
 
   disjunct(query) {
     return new Query(function*() {
+      let seen = new Set();
       let disjunction = new Set();
       for (let x of this) {
+        seen.add(x)
         disjunction.add(x);
       }
       for (let y of query) {
-        if (disjunction.has(y)) {
+        if (seen.has(y)) {
           disjunction.delete(y);
         } else {
           yield y;
