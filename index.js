@@ -33,3 +33,5 @@ export function disjunct(...iterables) {
     return query.disjunct(iterable);
   }, new Query())
 }
+
+export { Query };
