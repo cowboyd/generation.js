@@ -10,6 +10,21 @@ export default class Query {
     return this.length;
   }
 
+  get first() {
+    let [first] = this;
+    return first;
+  }
+
+  get second() {
+    let [,second] = this;
+    return second;
+  }
+
+  get third() {
+    let [,,third] = this;
+    return third;
+  }
+
   recompute() {
     let next = new Query(this.generator);
     if (!this.isReified || this.equals(next)) {
