@@ -2,36 +2,13 @@ import generator from './generator';
 
 export default class Query {
   constructor(source = []) {
-    this.generator = generator(source);
+    this[Symbol.iterator] = generator(source);
   }
 
   get length() {
-    for (let x of this) {};
-    return this.length;
-  }
-
-  get first() {
-    let [first] = this;
-    return first;
-  }
-
-  get second() {
-    let [,second] = this;
-    return second;
-  }
-
-  get third() {
-    let [,,third] = this;
-    return third;
-  }
-
-  recompute() {
-    let next = new Query(this.generator);
-    if (!this.isReified || this.equals(next)) {
-      return this;
-    } else {
-      return next;
-    }
+    let length = 0;
+    for (let x of this) { length++; }
+    return length;
   }
 
   equals(query) {
@@ -108,20 +85,5 @@ export default class Query {
       }
       yield* disjunction;
     }.bind(this))
-  }
-
-  *[Symbol.iterator]() {
-    this.isReified = true;
-    let cache = [];
-
-    this[Symbol.iterator] = function* iterateCache() {
-      yield* cache;
-    }
-
-    for (let item of this.generator()) {
-      cache.push(item);
-      yield item;
-    }
-    Object.defineProperty(this, 'length', { value: cache.length });
   }
 }
