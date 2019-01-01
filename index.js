@@ -1,37 +1,44 @@
 import Query from './src/query';
 
+export function query(iterable) {
+  return new Query(iterable);
+}
+
 export function map(iterable, fn) {
-  return new Query(iterable).map(fn);
+  return query(iterable).map(fn);
 }
 
 export function filter(iterable, fn) {
-  return new Query(iterable).filter(fn);
+  return query(iterable).filter(fn);
 }
 
 export function concat(...iterables) {
   return iterables.reduce((query, iterable) => {
     return query.concat(iterable);
-  }, new Query());
+  }, query());
 }
 
 export function union(...iterables) {
   return iterables.reduce((query, iterable) => {
     return query.union(iterable);
-  }, new Query());
+  }, query());
 }
 
 export function intersect(first, ...iterables) {
   if (first) {
-    return new Query(first).intersect(union(...iterables));
+    return query(first).intersect(union(...iterables));
   } else {
-    return new Query();
+    return query();
   }
 }
 
 export function disjunct(...iterables) {
   return iterables.reduce((query, iterable) => {
     return query.disjunct(iterable);
-  }, new Query())
+  }, query())
 }
 
-export { Query };
+
+export function equals(left, right) {
+  return query(left).equals(right);
+}

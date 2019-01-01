@@ -1,11 +1,11 @@
 import expect from "expect";
 
-import Query from '../src/query';
+import { query } from '../index';
 
 describe("Query", () => {
-  let query;
+  let q;
   beforeEach(function() {
-    query = new Query(function*() {
+    q = query(function*() {
       yield {};
       yield {};
       yield {};
@@ -13,29 +13,11 @@ describe("Query", () => {
   });
 
   it('plays back a generator', function() {
-    let [...result] = query;
+    let [...result] = q;
     expect(result).toEqual([{},{},{}]);
   });
 
   it('can count itself', function() {
-    expect(query.length).toEqual(3);
+    expect(q.length).toEqual(3);
   });
-
-  describe('caching queries', () => {
-    let source = function* () {
-      yield 1;
-      yield 2;
-      yield 3;
-    };
-    let query = new Query(function* () {
-      yield* source();
-    });
-
-    describe('when the underlying source remains constant', () => {
-      let result;
-      beforeEach(function() {
-        [...result] = query;
-      });
-    });
-  });
-})
+});
