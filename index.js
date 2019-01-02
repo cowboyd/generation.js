@@ -38,6 +38,9 @@ export function disjunct(...iterables) {
   }, query())
 }
 
+export function reduce(source, fn, initial) {
+  return query(source).reduce(fn, initial);
+}
 
 export function equals(left, right) {
   return query(left).equals(right);

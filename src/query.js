@@ -86,4 +86,18 @@ export default class Query {
       yield* disjunction;
     }.bind(this))
   }
+
+  reduce(fn, initial) {
+    let result = initial;
+    function reduce(fn, iterator, result) {
+      let next = iterator.next();
+      if (next.done) {
+        return result;
+      } else {
+        return reduce(fn, iterator, fn(result, next.value))
+      }
+    }
+
+    return reduce(fn, this[Symbol.iterator](), initial);
+  }
 }
