@@ -45,3 +45,5 @@ export function reduce(source, fn, initial) {
 export function equals(left, right) {
   return Generation(left).equals(right);
 }
+
+export default Generation;
