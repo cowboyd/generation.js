@@ -33,14 +33,14 @@ export default class Generation {
     }.bind(this))
   }
 
-  concat(query) {
+  concat(source) {
     return new Generation(function*() {
       yield* this;
-      yield* query;
+      yield* new Generation(source);
     }.bind(this));
   }
 
-  union(query) {
+  union(source) {
     return new Generation(function*() {
       let seen = new Set();
       for (let x of this) {
@@ -49,7 +49,7 @@ export default class Generation {
           yield x;
         }
       }
-      for (let y of query) {
+      for (let y of new Generation(source)) {
         if (!seen.has(y)) {
           seen.add(y);
           yield y;
@@ -58,17 +58,17 @@ export default class Generation {
     }.bind(this));
   }
 
-  intersect(query) {
+  intersect(source) {
     return new Generation(function*() {
       let seen = new Set();
-      for (let x of query) {
+      for (let x of new Generation(source)) {
         seen.add(x);
       }
       yield* this.filter(y => seen.has(y))
     }.bind(this));
   }
 
-  disjunct(query) {
+  disjunct(source) {
     return new Generation(function*() {
       let seen = new Set();
       let disjunction = new Set();
@@ -76,7 +76,7 @@ export default class Generation {
         seen.add(x)
         disjunction.add(x);
       }
-      for (let y of query) {
+      for (let y of new Generation(source)) {
         if (seen.has(y)) {
           disjunction.delete(y);
         } else {
