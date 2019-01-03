@@ -1,4 +1,5 @@
 [![npm](https://img.shields.io/npm/v/generation.svg)](https://www.npmjs.com/package/generation)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CircleCI](https://circleci.com/gh/cowboyd/generation.js.svg?style=shield)](https://circleci.com/gh/cowboyd/generation.js)
 
 ## Generation.js
