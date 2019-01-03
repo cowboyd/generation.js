@@ -2,7 +2,9 @@ import generator from './generator';
 
 export default class Generation {
   constructor(source = []) {
-    this[Symbol.iterator] = generator(source);
+    Object.defineProperty(this, Symbol.iterator, {
+      value: generator(source)
+    });
   }
 
   get length() {
