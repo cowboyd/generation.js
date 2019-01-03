@@ -1,11 +1,11 @@
 import expect from "expect";
 
-import { query } from '../index';
+import { Generation } from '../index';
 
-describe("Query", () => {
+describe("Generation", () => {
   let q;
   beforeEach(function() {
-    q = query(function*() {
+    q = Generation(function*() {
       yield {};
       yield {};
       yield {};

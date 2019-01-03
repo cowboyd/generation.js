@@ -1,13 +1,13 @@
 import expect from 'expect';
 
-import { query } from '../index';
+import { Generation } from '../index';
 
 describe('equals', ()=> {
   it('understands when two queries are equal', ()=> {
-    expect(query().equals(query())).toBe(true);
-    expect(query([1,2,3]).equals([1,2,3])).toBe(true);
+    expect(Generation().equals(Generation())).toBe(true);
+    expect(Generation([1,2,3]).equals([1,2,3])).toBe(true);
   });
   it('understands when two queries are not equal', ()=> {
-    expect(query([1,2]).equals([1,2,3])).toBe(false);
+    expect(Generation([1,2]).equals([1,2,3])).toBe(false);
   });
 });

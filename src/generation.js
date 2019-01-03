@@ -1,6 +1,6 @@
 import generator from './generator';
 
-export default class Query {
+export default class Generation {
   constructor(source = []) {
     this[Symbol.iterator] = generator(source);
   }
@@ -11,12 +11,12 @@ export default class Query {
     return length;
   }
 
-  equals(query) {
-    return this.disjunct(query).length === 0;
+  equals(source) {
+    return this.disjunct(source).length === 0;
   }
 
   map(fn) {
-    return new Query(function*() {
+    return new Generation(function*() {
       for (let x of this) {
         yield fn(x);
       }
@@ -24,7 +24,7 @@ export default class Query {
   }
 
   filter(fn) {
-    return new Query(function*() {
+    return new Generation(function*() {
       for (let item of this) {
         if (fn(item)) {
           yield item;
@@ -34,14 +34,14 @@ export default class Query {
   }
 
   concat(query) {
-    return new Query(function*() {
+    return new Generation(function*() {
       yield* this;
       yield* query;
     }.bind(this));
   }
 
   union(query) {
-    return new Query(function*() {
+    return new Generation(function*() {
       let seen = new Set();
       for (let x of this) {
         if (!seen.has(x)) {
@@ -59,7 +59,7 @@ export default class Query {
   }
 
   intersect(query) {
-    return new Query(function*() {
+    return new Generation(function*() {
       let seen = new Set();
       for (let x of query) {
         seen.add(x);
@@ -69,7 +69,7 @@ export default class Query {
   }
 
   disjunct(query) {
-    return new Query(function*() {
+    return new Generation(function*() {
       let seen = new Set();
       let disjunction = new Set();
       for (let x of this) {

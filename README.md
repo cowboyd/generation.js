@@ -115,7 +115,7 @@ for (let item of items) {
 // item = 4
 ```
 
-Note: every method of query can be used either as an instance method, or as
+Note: every method of generation can be used either as an instance method, or as
 a standalone function. So both of the following are equivalent:
 
 ``` javascript

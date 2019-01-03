@@ -6,7 +6,7 @@ describe('disjuctive union', function() {
   beforeEach(function() {
     disjunction = disjunct([ 1, 2, 3], [3,4, 4, 5], [5, 5, 6, 7, 1]);
   });
-  it('creates a query which excludes the common elements', function() {
+  it('creates a generation which excludes the common elements', function() {
     let [...result] = disjunction;
     expect(result.length).toEqual(4);
     expect(result.includes(2)).toBe(true);

@@ -1,47 +1,47 @@
-import Query from './src/query';
+import _Generation from './src/generation';
 
-export function query(iterable) {
-  return new Query(iterable);
+export function Generation(iterable) {
+  return new _Generation(iterable);
 }
 
 export function map(iterable, fn) {
-  return query(iterable).map(fn);
+  return Generation(iterable).map(fn);
 }
 
 export function filter(iterable, fn) {
-  return query(iterable).filter(fn);
+  return Generation(iterable).filter(fn);
 }
 
 export function concat(...iterables) {
-  return iterables.reduce((query, iterable) => {
-    return query.concat(iterable);
-  }, query());
+  return iterables.reduce((generation, iterable) => {
+    return generation.concat(iterable);
+  }, Generation());
 }
 
 export function union(...iterables) {
-  return iterables.reduce((query, iterable) => {
-    return query.union(iterable);
-  }, query());
+  return iterables.reduce((generation, iterable) => {
+    return generation.union(iterable);
+  }, Generation());
 }
 
 export function intersect(first, ...iterables) {
   if (first) {
-    return query(first).intersect(union(...iterables));
+    return Generation(first).intersect(union(...iterables));
   } else {
-    return query();
+    return Generation();
   }
 }
 
 export function disjunct(...iterables) {
-  return iterables.reduce((query, iterable) => {
-    return query.disjunct(iterable);
-  }, query())
+  return iterables.reduce((generation, iterable) => {
+    return generation.disjunct(iterable);
+  }, Generation())
 }
 
 export function reduce(source, fn, initial) {
-  return query(source).reduce(fn, initial);
+  return Generation(source).reduce(fn, initial);
 }
 
 export function equals(left, right) {
-  return query(left).equals(right);
+  return Generation(left).equals(right);
 }

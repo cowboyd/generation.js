@@ -2,7 +2,7 @@ import expect from "expect"
 
 import { filter } from '../index';
 
-describe('filtering query``', function() {
+describe('filtering generation``', function() {
   let filtered;
   beforeEach(function() {
     filtered = filter([ 1,2,3,4 ], x => (x % 2)  === 0);
