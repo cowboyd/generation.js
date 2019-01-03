@@ -1,3 +1,4 @@
+[![npm](https://img.shields.io/npm/v/generation.svg)](https://www.npmjs.com/package/generation)
 [![CircleCI](https://circleci.com/gh/cowboyd/generation.js.svg?style=shield)](https://circleci.com/gh/cowboyd/generation.js)
 
 ## Generation.js
