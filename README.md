@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/cowboyd/generation.js.svg?style=shield)](https://circleci.com/gh/cowboyd/generation.js)
+
 ## Generation.js
 
 The easiest way to compose JavaScript [iterables][1] and
