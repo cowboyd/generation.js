@@ -46,8 +46,8 @@ let completedTodos = filter(todos, todo => todo.isCompleted)
 
 ```
 
-All we've done here is define the queries, but no filtering actually
-happens at this point until we actually enumerate the result:
+All we've done here is define the generations, but no filtering
+actually happens at this point until we actually enumerate the result:
 
 
 ``` javascript
@@ -58,7 +58,7 @@ console.log(inProgressTodos.length)
 //=> { title: 'get milk', isCompleted: false, isInProgress: true }
 ```
 
-Queries can be combined freely, for example if an interface is
+Generations can be combined freely, for example if an interface is
 selecting just the completed and in-progress items:
 
 ``` jsx
