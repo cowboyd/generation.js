@@ -269,6 +269,6 @@ let sum = reduce([1,2,3], (sum, x) => sum + x, 0);
 
 > Note: will not work on infinite generations!
 
-
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_GeneratorFunction/Objects
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
