@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "A library for transforming generators and iterators",
   "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.esm",
   "repository": "https://github.com/cowboyd/generation.js",
   "author": "Charles Lowell <cowboyd@frontside.io>",
   "license": "MIT",
@@ -13,10 +13,10 @@
     "test": "mocha --recursive -r tests/setup tests"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.55",
-    "@babel/plugin-proposal-class-properties": "7.0.0-beta.55",
-    "@babel/preset-env": "7.0.0-beta.55",
-    "@babel/register": "7.0.0-beta.55",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "expect": "^23.4.0",
     "mocha": "^5.2.0",
     "regenerator-runtime": "^0.12.0",
